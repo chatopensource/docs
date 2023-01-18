@@ -14,28 +14,56 @@
   "topbarLinks": [
     {
       "name": "Documentation",
-      "url": "https://docs.getasimov.com"
+      "url": "https://mintlify.com/docs"
     }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://github.com/asimovai/asimov"
+    "url": "https://github.com/mintlify/starter"
   },
   "anchors": [
     {
+      "name": "API Reference",
+      "icon": "rectangle-terminal",
+      "url": "api-reference"
+    },
+    {
+      "name": "Changelog",
+      "icon": "list",
+      "url": "https://mintlify.com"
+    },
+    {
       "name": "Community",
-      "icon": "twitter",
-      "url": "https://twitter.com/asimovai"
+      "icon": "discord",
+      "url": "https://mintlify.com/community"
     }
   ],
   "navigation": [
     {
       "group": "Home",
       "pages": ["introduction", "development"]
+    },
+    {
+      "group": "Learn More",
+      "pages": ["features", "resources"]
+    },
+    {
+      "group": "API Documentation",
+      "pages": ["api-reference/authentication"]
+    },
+    {
+      "group": "Endpoint Examples",
+      "pages": [
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/update",
+        "api-reference/endpoint/delete"
+      ]
     }
   ],
   "footerSocials": {
-    "twitter": "https://twitter.com/asimovai",
-    "github": "https://github.com/asimovai"
+    "twitter": "https://twitter.com/mintlify",
+    "github": "https://github.com/mintlify",
+    "linkedin": "https://www.linkedin.com/company/mintsearch"
   }
 }
