@@ -42,6 +42,85 @@ The next step is to setup permissions and you should select "Attach existing pol
 
 [PricingGetProducts](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3A923082272114%3Apolicy%2FPricingGetProducts)
 
+[AmazonEC2ReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonEC2ReadOnlyAccess)
+
+[AmazonRDSReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonRDSReadOnlyAccess)
+
+Create a policy called AmazonWorkspacesReadOnlyAccess with the following permissions
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "workspaces:DescribeConnectionAliasPermissions",
+                "workspaces:DescribeAccount",
+                "workspaces:DescribeWorkspaceImages",
+                "workspaces:ListAvailableManagementCidrRanges",
+                "workspaces:DescribeWorkspaceSnapshots",
+                "workspaces:DescribeWorkspaceBundles",
+                "workspaces:DescribeClientProperties",
+                "workspaces:DescribeAccountModifications",
+                "workspaces:DescribeConnectClientAddIns",
+                "workspaces:DescribeWorkspacesConnectionStatus",
+                "workspaces:DescribeConnectionAliases",
+                "workspaces:CreateTags",
+                "workspaces:DeleteTags",
+                "workspaces:DescribeTags",
+                "workspaces:DescribeWorkspaceImagePermissions",
+                "workspaces:DescribeIpGroups",
+                "workspaces:DescribeWorkspaceDirectories",
+                "workspaces:DescribeWorkspaces",
+                "workspaces:DescribeClientBranding"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+Create a policy called AmazonECRReadOnlyAccess with the following permissions
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetRegistryPolicy",
+                "ecr:DescribeImageScanFindings",
+                "ecr:GetLifecyclePolicyPreview",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:DescribeRegistry",
+                "ecr:DescribePullThroughCacheRules",
+                "ecr:DescribeImageReplicationStatus",
+                "ecr:GetAuthorizationToken",
+                "ecr:ListTagsForResource",
+                "ecr:ListImages",
+                "ecr:BatchGetRepositoryScanningConfiguration",
+                "ecr:GetRegistryScanningConfiguration",
+                "ecr:UntagResource",
+                "ecr:BatchGetImage",
+                "ecr:DescribeImages",
+                "ecr:TagResource",
+                "ecr:DescribeRepositories",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetRepositoryPolicy",
+                "ecr:GetLifecyclePolicy"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+Attach that policy directly to the user
+
+
+
 On the review page click "Create User"
 
 ## 🔑 generate a secret access key and access key ID
