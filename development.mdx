@@ -28,18 +28,26 @@ description: "Install the Hackerforms CLI to preview changes locally"
 </Tabs>
 
 ## 🌥️ Create an AWS account, if one does not already exist.
-You will need to setup your root account, login to the [AWS account console](https://console.aws.amazon.com/console/home), and create a [Terraform Cloud](https://app.terraform.io) account to attach to your AWS console - alternatively use `terraform login` to login to your terraform account.
-## 🔒 Create a new IAM user in the AWS account called "terraform", and grant it AdministratorAccess permissions.
-Setup a new user called terraform if you don't already have a user with AdministratorAccess permissions that has the "Select AWS credential type" option of "Access key - Programmatic access" checked [using IAM](https://console.aws.amazon.com/iam/home#/users$new?step=details)
+You will need to setup your root account, login to the [AWS account console](https://console.aws.amazon.com/console/home)
+## 🔒 Create a new IAM user in the AWS account called "asimov", and grant it the following settings.
+Setup a new user called asimov if you don't already have a user with AdministratorAccess permissions that has the "Select AWS credential type" option of "Access key - Programmatic access" checked [using IAM](https://console.aws.amazon.com/iam/home#/users$new?step=details)
 
-The next step is to setup permissions and you should select "Attach existing policies directly" and then choose [AdministratorAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAdministratorAccess)
+The next step is to setup permissions and you should select "Attach existing policies directly" and then choose:
+
+[AWSBillingReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAWSBillingReadOnlyAccess)
+
+[CloudWatchReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FCloudWatchReadOnlyAccess)
+
+[GetCostForecast](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3A923082272114%3Apolicy%2FGetCostForecast)
+
+[PricingGetProducts](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3A923082272114%3Apolicy%2FPricingGetProducts)
 
 On the review page click "Create User"
-## Hello world
-### generate a secret access key and access key ID
-The next step you should see an AWS key pair
 
-This AWS key pair you created for the new user called terraform in your region will be used by terraform for setting up the infrastructure in AWS and use this AWS ID and key pair as `<your aws id>` and `<your aws key>`
+## 🔑 generate a secret access key and access key ID
+In the next step you should see an AWS key pair
+
+This AWS key pair you created for the new user called asimov in your region will be used by Asimov AI locally for accessing your infrastructure in AWS and use this AWS ID and key pair as `<your aws id>` and `<your aws key>`
 
 Keep this key pair somewhere safe for now by clicking the "Show" link under "Secret access key" to copy and paste it somewhere else and then also copy/paste the "Access key ID"
 ## 💻 Configure AWS locally
