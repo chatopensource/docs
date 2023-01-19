@@ -1,31 +1,60 @@
 ---
 title: "Development"
-description: "Install the Mintlify CLI to preview changes locally"
+description: "Install the Hackerforms CLI to preview changes locally"
+
 ---
 
 <Tabs>
-  <Tab title="npm">
-  Using the [npm](https://www.npmjs.com) package manager
+  <Tab title="pip">
+  Using the [pip](https://pypi.org/project/pip/) package manager
+  Visit <a href='https://app.getasimov.com/key'>Asimov AI</a> and the free commercial license key will be sent to your email
 
   ```bash
-  npm i -g mintlify
+  pip install hackerforms
+  pip install awscli
   ```
   </Tab>
-  <Tab title="yarn">
-  Using the [yarn](https://yarnpkg.com) package manager
+  <Tab title="brew">
+  Using the [homebrew](https://brew.sh/) package manager
   
   ```bash
-  yarn global add mintlify
+  brew install python@3.10
+  brew install awscli
   ```
   </Tab>
 </Tabs>
 
+## 🌥️ Create an AWS account, if one does not already exist.
+You will need to setup your root account, login to the [AWS account console](https://console.aws.amazon.com/console/home), and create a [Terraform Cloud](https://app.terraform.io) account to attach to your AWS console - alternatively use `terraform login` to login to your terraform account.
+## 🔒 Create a new IAM user in the AWS account called "terraform", and grant it AdministratorAccess permissions.
+Setup a new user called terraform if you don't already have a user with AdministratorAccess permissions that has the "Select AWS credential type" option of "Access key - Programmatic access" checked [using IAM](https://console.aws.amazon.com/iam/home#/users$new?step=details)
+
+The next step is to setup permissions and you should select "Attach existing policies directly" and then choose [AdministratorAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAdministratorAccess)
+
+No need to add any tags
+
+On the review page click "Create User"
+## 🔑 Configure the AWS CLI with the "Secret access key" and "Access key ID" of the new IAM user.
+### generate a secret access key and access key ID
+The next step you should see an AWS key pair
+
+This AWS key pair you created for the new user called terraform in your region will be used by terraform for setting up the infrastructure in AWS and use this AWS ID and key pair as `<your aws id>` and `<your aws key>`
+
+Keep this key pair somewhere safe for now by clicking the "Show" link under "Secret access key" to copy and paste it somewhere else and then also copy/paste the "Access key ID"
+## 💻 Configure AWS locally
+
+Store the "Secret access key" i.e. `<your aws key>` and "Access key ID" i.e. `<your aws id>` by using the aws configure command below
+
+```
+aws configure
+```
+
 ## Previewing Changes Locally
 
-Run the following command at the root of your documentation where `mint.json` is located. Mintlify will open at `localhost:3000`.
+Run the following command at the root of your repo. Abstra will open in your local browser automatically.
 
 ```bash Terminal
-mintlify dev
+python3 AWSGrader.py
 ```
 
 ## Troubleshooting
@@ -33,17 +62,7 @@ mintlify dev
 Here's how to solve some common problems when working with the CLI.
 
 <AccordionGroup>
-  <Accordion title="Mintlify is not loading">
-    Update to Node v18 and the latest version of Git.
-  </Accordion>
-  <Accordion
-    title="Mintlify is not loading after updating Node and Git"
-  >
-    Run `mintlify install` and try again.
-  </Accordion>
-  <Accordion
-    title="Port 3000 is already taken"
-  >
-    The Mintlify CLI will automatically move to the next port if you were already running something at `localhost:3000`. For example, if you were running two documentation sites, they would be at `localhost:3000` and `localhost:3001`.
+  <Accordion title="stripe.error.AuthenticationError: No API key provided">
+    Input a your own Stripe API key.
   </Accordion>
 </AccordionGroup>
