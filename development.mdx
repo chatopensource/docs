@@ -30,7 +30,7 @@ description: "Install the Hackerforms CLI, AWS CLI, and Asimov CLI to preview ch
 ## 🌥️ Create an AWS account, if one does not already exist.
 You will need to setup your root account, login to the [AWS account console](https://console.aws.amazon.com/console/home)
 ## 🔒 Create a new IAM user in the AWS account called "asimov", and grant it the following settings.
-Setup a new user called asimov if you don't already have a user with AdministratorAccess permissions that has the "Select AWS credential type" option of "Access key - Programmatic access" checked [using IAM](https://console.aws.amazon.com/iam/home#/users$new?step=details)
+Setup a new user called asimov if you don't already have a role [using IAM](https://console.aws.amazon.com/iamv2/home#/roles/create?step=selectEntities))
 
 The next step is to setup permissions and you should select "Attach existing policies directly" and then choose:
 
@@ -117,23 +117,12 @@ Create a policy called AmazonECRReadOnlyAccess with the following permissions
     ]
 }
 ```
-Attach both policies directly to the user
+Attach both policies directly to the role
 
-On the review page click "Create User"
+On the review page click "Create Role"
 
-## 🔑 generate a secret access key and access key ID
-In the next step you should see an AWS key pair
-
-This AWS key pair you created for the new user called asimov in your region will be used by Asimov AI locally for accessing your infrastructure in AWS and use this AWS ID and key pair as `<your aws id>` and `<your aws key>`
-
-Keep this key pair somewhere safe for now by clicking the "Show" link under "Secret access key" to copy and paste it somewhere else and then also copy/paste the "Access key ID"
-## 💻 Configure AWS locally
-
-Store the "Secret access key" i.e. `<your aws key>` and "Access key ID" i.e. `<your aws id>` by using the aws configure command below
-
-```
-aws configure
-```
+## 🔑 use your account ID and role to onboard
+Use this role in the [cloud version](https://app.getasimov.com) of Asimov AI
 
 ## Previewing Changes Locally
 
