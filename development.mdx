@@ -1,96 +1,25 @@
 ---
 title: "Development"
-description: "Install the Hackerforms CLI, AWS CLI, and Asimov CLI to preview changes locally"
+description: "Install the Cloud version of Asimov AI and get instant cloud activity insights for all infrastructure"
 
 ---
 
-<Tabs>
-  <Tab title="pip">
-  Using the [pip](https://pypi.org/project/pip/) package manager
-  
-  Visit <a href='https://app.getasimov.com/key'>Asimov AI</a> and the free commercial license key will be sent to your email
+## 🔒 Setup your AWS account
 
-  ```bash
-  pip install hackerforms
-  pip install awscli
-  ```
-  </Tab>
-  <Tab title="brew">
-  Using the [homebrew](https://brew.sh/) package manager
-    
-  Visit <a href='https://app.getasimov.com/key'>Asimov AI</a> and the free commercial license key will be sent to your email
-  
-  ```bash
-  brew install python@3.10
-  brew install awscli
-  ```
-  </Tab>
-</Tabs>
+First create a [new policy](https://console.aws.amazon.com/iam/home#/policies$new?step=edit)
 
-## 🌥️ Create an AWS account, if one does not already exist.
-You will need to setup your root account, login to the [AWS account console](https://console.aws.amazon.com/console/home)
-## 🔒 Create a new IAM user in the AWS account called "asimov", and grant it the following settings.
-Setup a new user called asimov if you don't already have a role [using IAM](https://console.aws.amazon.com/iamv2/home#/roles/create?step=selectEntities))
+Go to the "JSON" tab of the new policy
 
-The next step is to setup permissions and you should select "Attach existing policies directly" and then choose:
-
-[AWSBillingReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAWSBillingReadOnlyAccess)
-
-[CloudWatchReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FCloudWatchReadOnlyAccess)
-
-[GetCostForecast](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3A923082272114%3Apolicy%2FGetCostForecast)
-
-[PricingGetProducts](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3A923082272114%3Apolicy%2FPricingGetProducts)
-
-[AmazonEC2ReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonEC2ReadOnlyAccess)
-
-[AmazonRDSReadOnlyAccess](https://console.aws.amazon.com/iam/home#/policies/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonRDSReadOnlyAccess)
-
-Create a policy called AmazonWorkspacesReadOnlyAccess with the following permissions
-
+Copy and paste this JSON into the new policy
 ```
 {
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
             "Effect": "Allow",
             "Action": [
-                "workspaces:DescribeConnectionAliasPermissions",
-                "workspaces:DescribeAccount",
-                "workspaces:DescribeWorkspaceImages",
-                "workspaces:ListAvailableManagementCidrRanges",
-                "workspaces:DescribeWorkspaceSnapshots",
-                "workspaces:DescribeWorkspaceBundles",
-                "workspaces:DescribeClientProperties",
-                "workspaces:DescribeAccountModifications",
-                "workspaces:DescribeConnectClientAddIns",
-                "workspaces:DescribeWorkspacesConnectionStatus",
-                "workspaces:DescribeConnectionAliases",
-                "workspaces:CreateTags",
-                "workspaces:DeleteTags",
-                "workspaces:DescribeTags",
-                "workspaces:DescribeWorkspaceImagePermissions",
-                "workspaces:DescribeIpGroups",
-                "workspaces:DescribeWorkspaceDirectories",
-                "workspaces:DescribeWorkspaces",
-                "workspaces:DescribeClientBranding"
-            ],
-            "Resource": "*"
-        }
-    ]
-}
-```
-
-Create a policy called AmazonECRReadOnlyAccess with the following permissions
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": [
+                "aws-portal:ViewBilling",
+                "ec2:DescribeRegions",
                 "ecr:GetRegistryPolicy",
                 "ecr:DescribeImageScanFindings",
                 "ecr:GetLifecyclePolicyPreview",
@@ -110,34 +39,102 @@ Create a policy called AmazonECRReadOnlyAccess with the following permissions
                 "ecr:DescribeRepositories",
                 "ecr:BatchCheckLayerAvailability",
                 "ecr:GetRepositoryPolicy",
-                "ecr:GetLifecyclePolicy"
+                "ecr:GetLifecyclePolicy",
+                "ce:GetCostForecast",
+                "pricing:GetProducts",
+                "workspaces:DescribeConnectionAliasPermissions",
+                "workspaces:DescribeAccount",
+                "workspaces:DescribeWorkspaceImages",
+                "workspaces:ListAvailableManagementCidrRanges",
+                "workspaces:DescribeWorkspaceSnapshots",
+                "workspaces:DescribeWorkspaceBundles",
+                "workspaces:DescribeClientProperties",
+                "workspaces:DescribeAccountModifications",
+                "workspaces:DescribeConnectClientAddIns",
+                "workspaces:DescribeWorkspacesConnectionStatus",
+                "workspaces:DescribeConnectionAliases",
+                "workspaces:CreateTags",
+                "workspaces:DeleteTags",
+                "workspaces:DescribeTags",
+                "workspaces:DescribeWorkspaceImagePermissions",
+                "workspaces:DescribeIpGroups",
+                "workspaces:DescribeWorkspaceDirectories",
+                "workspaces:DescribeWorkspaces",
+                "workspaces:DescribeClientBranding",
+                "ecr:GetAuthorizationToken",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:GetRepositoryPolicy",
+                "ecr:DescribeRepositories",
+                "ecr:ListImages",
+                "ecr:DescribeImages",
+                "ecr:BatchGetImage",
+                "ecr:GetLifecyclePolicy",
+                "ecr:GetLifecyclePolicyPreview",
+                "ecr:ListTagsForResource",
+                "ecr:DescribeImageScanFindings",
+                "ec2:Describe*",
+                "elasticloadbalancing:Describe*",
+                "cloudwatch:ListMetrics",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:Describe*",
+                "autoscaling:Describe*",
+                "rds:Describe*",
+                "rds:ListTagsForResource",
+                "ec2:DescribeAccountAttributes",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeInternetGateways",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcAttribute",
+                "ec2:DescribeVpcs",
+                "cloudwatch:GetMetricStatistics",
+                "logs:DescribeLogStreams",
+                "logs:GetLogEvents",
+                "devops-guru:GetResourceCollection",
+                "autoscaling:Describe*",
+                "cloudwatch:Describe*",
+                "cloudwatch:Get*",
+                "cloudwatch:List*",
+                "logs:Get*",
+                "logs:List*",
+                "logs:StartQuery",
+                "logs:StopQuery",
+                "logs:Describe*",
+                "logs:TestMetricFilter",
+                "logs:FilterLogEvents",
+                "oam:ListSinks",
+                "sns:Get*",
+                "sns:List*",
+                "oam:ListAttachedLinks",
+                "aws-portal:ViewBilling"
             ],
             "Resource": "*"
         }
     ]
 }
 ```
-Attach both policies directly to the role
 
-On the review page click "Create Role"
+Call the policy "ReadOnlyAccess"
 
-## 🔑 use your account ID and role to onboard
-Use this role in the [cloud version](https://app.getasimov.com) of Asimov AI
+[Setup a role called asimov](https://console.aws.amazon.com/iamv2/home?region=us-east-1#/roles/create?awsAccount=777581146049&policies=arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FReadOnlyAccess&roleName=asimov&step=selectEntities&trustedEntityType=AWS_ACCOUNT)
 
-## Previewing Changes Locally
+Click "Next" in AWS
 
-Run the following command at the root of your repo. Abstra will open in your local browser automatically.
+In the "Add Permissions" section add the policy created earlier called "ReadOnlyAccess"
 
-```bash Terminal
-python3 AWSGrader.py
-```
+Click "Next"
+
+Name the role "asimov"
+
+On the review page click 'Create Role'
 
 ## Troubleshooting
 
-Here's how to solve some common problems when working with the CLI.
+Here's how to solve some common problems when working with the Cloud.
 
 <AccordionGroup>
-  <Accordion title="stripe.error.AuthenticationError: No API key provided">
-    Input a your own Stripe API key.
+  <Accordion title="Please refresh the page ⛅">
+    There is a timeout of 1 hour. Please refresh the page and you should still be logged in after several hours.
   </Accordion>
 </AccordionGroup>
